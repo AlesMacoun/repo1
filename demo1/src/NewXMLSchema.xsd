@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  
+    <xs:attribute name="enrichment-id" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>Definice atributu obsahujícího ID entity, o kterou má být na ESB driver file obohacen</xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+
+    <xs:attribute name="enrichment-type" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>Definice atributu obsahujícího typ entity, o kterou má být na ESB driver file obohacen</xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+
+    <xs:complexType name="address">
+        <xs:annotation>
+            <xs:documentation>Definice elementu: Adresa</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+
+            <xs:element type="xs:string" name="street" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>1. řádek adresy; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="town" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>2. řádek adresy; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="city" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>3. řádek adresy; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="postal-code" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Poštovní směrovací číslo; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="country" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Kód země; číselníková hodnota; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:all>
+
+        <xs:attribute ref="enrichment-id" />
+        <xs:attribute ref="enrichment-type" />
+
+    </xs:complexType>
+
+    <xs:complexType name="party">
+        <xs:annotation>
+            <xs:documentation>Definice elementu: Party (subjekt)</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+
+            <xs:element type="xs:string" name="degree" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Akademický titul před jménem; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="first-name" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Křestní jméno; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="surname" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Příjmení; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:date" name="date-of-birth" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Datum narození; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="personal-id-nr" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Identifikátor fyzické osoby; v ČR se jedná o rodné číslo; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="degree-after" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Akademický titul za jménem; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="company-name" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Název společnosti (právnické osoby) v případě FOP a PO subjektů; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="xs:string" name="company-registration-nr" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Identifikátor právnické osoby v případě FOP a PO subjektů; v ČR se jedná o IČ; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="address" name="residence-address" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Adresa trvalého pobytu; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element type="address" name="contact-address" minOccurs="0" maxOccurs="1" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>Kontaktní adresa pobytu; RDM:</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+
+        <xs:attribute ref="enrichment-id" />
+        <xs:attribute ref="enrichment-type" />
+
+    </xs:complexType>
+
+    <xs:complexType name="signature">
+        <xs:annotation>
+            <xs:documentation>Podpisová část dokumentu</xs:documentation>
+        </xs:annotation>
+
+        <xs:sequence>
+
+            <xs:element name="place" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Místo podpisu</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="date" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Datum podpisu</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="volume" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>Počet vyhotovení</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="signer" type="signer" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Údaje o zaměstnanci KB</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="signer">
+        <xs:annotation>
+            <xs:documentation>Údaje o zaměstnanci KB v pPodpisové části dokumentu</xs:documentation>
+        </xs:annotation>
+
+        <xs:sequence>
+
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Jméno a příjmení zaměstnance KB</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="role" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Pracovní zařazení</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="fee">
+        <xs:annotation>
+            <xs:documentation>Definice poplatku</xs:documentation>
+        </xs:annotation>
+
+        <xs:sequence>
+
+            <xs:element name="desc" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Název poplatku</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="amount" type="xs:decimal">
+                <xs:annotation>
+                    <xs:documentation>Částka poplatku</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="currency" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Kód měny poplatku</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="frequency" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Frekvence platby poplatku</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="frequency-code" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Kód frekvence platby poplatku</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="display-gratis" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Příznak, zdali se zobrazit slovo "zdarma", když je hodnota 0</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="driver">
+        <xs:annotation>
+            <xs:documentation>Definice hlavního elementu každého driver file</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="customer" type="customer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="customer">
+        <xs:annotation>
+            <xs:documentation>Definice elementu obsahujícího požadavek na renderování dokumentu</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="metadata" type="metadata"/>
+            <xs:element name="data" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="metadata">
+        <xs:annotation>
+            <xs:documentation>Definice elementu obsahujícího metadata požadavku na renderování dokumentu</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="template-type" type="xs:string"/>
+            <xs:element name="template-effective-date" type="xs:dateTime"/>
+            <xs:element name="chronicle-doc-id" type="xs:integer"/>
+            <xs:element name="doc-id" type="xs:integer"/>
+            <xs:element name="output-type" type="xs:string"/>
+            <xs:element name="barcode" type="xs:string"/>
+        </xs:all>
+    </xs:complexType>
+
+
+  <xs:element name="driver" type="driver" />
+  <xs:element name="customer" type="customer" />
+
+  <xs:element name="data">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="main-applicant"/>
+        <xs:element ref="co-applicants" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="product" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="signature"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="main-applicant" type="party" />
+
+  <xs:element name="co-applicants">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="co-applicant"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="co-applicant" type="party" />
+  
+  <xs:element name="product">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="contract-registration-nr" type="xs:normalizedString"/>
+        <xs:element name="credit-bank-account" type="xs:string"/>
+        <xs:element ref="parameters"/>
+        <xs:element ref="fees"/>
+        <xs:element ref="consolidated-loans" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="postpone-draw-conditions" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="special-conditions" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="communication"/>
+        <xs:element ref="independent-agent" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="tied-agent" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="payment-calendar"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="parameters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="loan-type" minOccurs="0" maxOccurs="1"  type="xs:normalizedString"/>
+        <xs:element name="loan" minOccurs="0" maxOccurs="1" type="fee"/>
+        <xs:element name="loan-purpose" minOccurs="0" maxOccurs="1" type="fee"/>
+        <xs:element name="purpose" minOccurs="0" maxOccurs="1" type="xs:string"/>
+        <xs:element name="duration" minOccurs="0" maxOccurs="1" type="xs:integer"/>
+        <xs:element name="maturity-date" minOccurs="0" maxOccurs="1" type="xs:date"/>
+        <xs:element ref="interest-rate" minOccurs="0" maxOccurs="1" />
+        <xs:element name="anuity" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="rpsn-rate" minOccurs="0" maxOccurs="1" type="xs:decimal" />
+        <xs:element name="total-amount-payable" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="monthly-insurance" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="loan-drawdown-final-date" minOccurs="0" maxOccurs="1" type="xs:date" />
+        <xs:element name="loan-repayment-bank-account" minOccurs="0" maxOccurs="1" type="xs:string" />
+        <xs:element name="payment-day-of-month" minOccurs="0" maxOccurs="1" type="xs:integer" />
+        <xs:element name="late-payment-interest-rate" minOccurs="0" maxOccurs="1" type="xs:decimal" />
+        <xs:element name="first-anuit-date" minOccurs="0" maxOccurs="1" type="xs:date" />
+        <xs:element name="drawdown-type" minOccurs="0" maxOccurs="1" type="xs:string" />
+        <xs:element name="drawdown-penalty" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="drawdown" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="kb-employee" minOccurs="0" maxOccurs="1" type="xs:string" />
+        <xs:element name="consolidation-afi" minOccurs="0" maxOccurs="1" type="xs:string" />
+        <xs:element name="consolidation-kb" minOccurs="0" maxOccurs="1" type="xs:string" />
+        <xs:element name="non-purpose-part" minOccurs="0" maxOccurs="1" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="fees">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="contractual-fine" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="manufacturing" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="draw" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="e-statement" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="paper-statement" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="first-reminder" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="second-reminder" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="change-conditions" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="change-specifications" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="one-insured-rate" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="other-insured-rate" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="monthly-maintanence" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="early-loan-repayment" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="loan-monthly-maintanence" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element name="product-usage" minOccurs="0" maxOccurs="1" type="fee" />
+        <xs:element ref="rpsn" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="rpsn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="fee" maxOccurs="unbounded" type="fee"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="consolidated-loans">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="currency" minOccurs="0" maxOccurs="1"/>
+        <xs:element maxOccurs="unbounded" ref="consolidated-loan"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="consolidated-loan">
+    <xs:complexType>
+      <xs:sequence>
+          <xs:element name="product-title" type="xs:string"/>
+          <xs:element ref="amount" />
+          <xs:element name="contract-nr" type="xs:normalizedString" />
+          <xs:element name="creditor" type="xs:string"/>
+          <xs:element name="bank-account" type="xs:string"/>
+          <xs:element name="product-use" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="postpone-draw-conditions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="condition-text"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="special-conditions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="condition-text"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="communication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="statement"/>
+        <xs:element name="delivery-address" type="address" />
+        <xs:element name="branch-address" type="address" />
+        <xs:element name="business-place-address" type="address" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="statement">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="delivery-type" minOccurs="0" type="xs:string" />
+        <xs:element name="email-1" minOccurs="0" type="xs:string" />
+        <xs:element name="email-2" minOccurs="0" type="xs:string" />
+        <xs:element name="delivery-frequency" minOccurs="0" type="xs:normalizedString"/>
+        <xs:element name="other-delivery-option" minOccurs="0" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="independent-agent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="company-name"/>
+        <xs:element ref="company-registration-nr"/>
+        <xs:element name="residence-address" type="address"/>
+        <xs:element name="contact-address" type="address"/>
+        <xs:element ref="phone-number"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tied-agent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="company-name"/>
+        <xs:element ref="company-registration-nr"/>
+        <xs:element name="residence-address" type="address"/>
+        <xs:element name="contact-address" type="address"/>
+        <xs:element ref="phone-number"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="payment-calendar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="currency" minOccurs="0"/>
+        <xs:element maxOccurs="unbounded" ref="item"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="item">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="nr" type="xs:integer"/>
+        <xs:element name="date" type="xs:date"/>
+        <xs:element ref="amount" />
+        <xs:element name="principal" type="xs:decimal"/>
+        <xs:element ref="interest-rate"/>
+        <xs:element name="balance-of-principal" type="xs:decimal"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="signature" type="signature" />
+
+  <xs:element name="amount" type="xs:decimal"/>
+  <xs:element name="currency" type="xs:normalizedString"/>
+  <xs:element name="interest-rate" type="xs:decimal"/>
+  <xs:element name="condition-text" type="xs:string"/>
+  <xs:element name="company-name" type="xs:string"/>
+  <xs:element name="company-registration-nr" type="xs:integer"/>
+  <xs:element name="phone-number" type="xs:integer"/>
+  <xs:element name="date" type="xs:date"/>
+</xs:schema>
